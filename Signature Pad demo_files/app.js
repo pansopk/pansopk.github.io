@@ -110,6 +110,36 @@ submitButton.addEventListener("click", function (event) {
   ///////////////////////////////////
   // to add uploading function
   ///////////////////////////////////
+  ajax({
+    type: "GET",
+    url: "https://script.google.com/macros/s/AKfycby4EtzWYLXdGYn9kAzbdDSbZElwqWV8TS3LGJM_HJMjZFSNxAvo/exec",
+    data: {
+      "First Name": inputFirstName.val(),
+      "Last Name": inputLastName.val(),
+      "ID": inputId.val(),
+      "Hours": inputHours.val(),
+    },
+    success: function (response) {
+      isLoading(false);
+
+      alert("Uploaded");
+      snackbar.html('Uploaded.').addClass('show');
+      setTimeout(function () {
+        snackbar.removeClass('show');
+      }, 3000);
+
+      //Clear inputs
+      //inputName.val('');
+      //inputAge.val('');
+      //inputArea.val('');
+    },
+    error: function (request, status, error) {
+      isLoading(false);
+      console.log("code:" + request.status + "\n" + "error:" + error);
+      console.log(request.responseText);
+    }
+  });
+
   alert("uploaded"); // add uploading function
 
   signaturePad.clear();

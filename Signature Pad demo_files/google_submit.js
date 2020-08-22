@@ -10,10 +10,10 @@ var inputHours = $('#hname');
 function isLoading(status){
   if(status){
     $('html, body').addClass('wait');
-    googleSubmitBtn.attr('disabled', true).html('입력중...');
+    googleSubmitBtn.attr('disabled', true).html('Typing...');
   } else {
     $('html, body').removeClass('wait');
-    googleSubmitBtn.attr('disabled', false).html('입력');
+    googleSubmitBtn.attr('disabled', false).html('Type');
   }
 }
 
@@ -31,7 +31,9 @@ function checkInput(){
 
 $('#google-submit').click(function () {
 
+  alert("Uploaded");
   if (checkInput()) { return; }
+  
 
   isLoading(true);
 
