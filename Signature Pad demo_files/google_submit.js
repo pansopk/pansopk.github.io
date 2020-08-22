@@ -10,15 +10,16 @@ var inputHours = $('#hname');
 function isLoading(status){
   if(status){
     $('html, body').addClass('wait');
-    googleSubmitBtn.attr('disabled', true).html('Typing...');
+    googleSubmitBtn.attr('disabled', true).html('Submitting...');
   } else {
     $('html, body').removeClass('wait');
-    googleSubmitBtn.attr('disabled', false).html('Type');
+    googleSubmitBtn.attr('disabled', false).html('Submit');
   }
 }
 
 function checkInput(){
   var isEmpty = false;
+
   $.each(inputs, function (index, element) {
     if (element.value === '') {
       alert('Empty lines');
@@ -26,31 +27,42 @@ function checkInput(){
       return false;
     }
   });
+
+  if (signaturePad.isEmpty()) {
+    alert("Please provide a signature.");
+    isEmpty = true;
+    return false;
+  }
+
   return isEmpty;
 }
 
 $('#google-submit').click(function () {
 
-  alert("Uploaded");
   if (checkInput()) { return; }
-  
 
   isLoading(true);
 
+  //var dataURL = signaturePad.toDataURL("image/jpeg");
+  //download(dataURL, "signature.jpg");
+
   $.ajax({
     type: "GET",
+    //url: "https://script.google.com/macros/s/AKfycby4EtzWYLXdGYn9kAzbdDSbZElwqWV8TS3LGJM_HJMjZFSNxAvo/exec",
+    //url:   "https://script.google.com/macros/s/AKfycby4EtzWYLXdGYn9kAzbdDSbZElwqWV8TS3LGJM_HJMjZFSNxAvo/exec",
     url: "https://script.google.com/macros/s/AKfycby4EtzWYLXdGYn9kAzbdDSbZElwqWV8TS3LGJM_HJMjZFSNxAvo/exec",
     data: {
       "First Name": inputFirstName.val(),
       "Last Name": inputLastName.val(),
       "ID": inputId.val(),
       "Hours": inputHours.val(),
+      "Signature": signaturePad.toDataURL("image/jpeg"),
     },
     success: function (response) {
       isLoading(false);
 
-      alert("Uploaded");
-      snackbar.html('Uploaded.').addClass('show');
+      //alert("Uploaded");
+      //snackbar.html('Uploaded.').addClass('show');
       setTimeout(function () {
         snackbar.removeClass('show');
       }, 3000);
