@@ -103,7 +103,7 @@ submitButton.addEventListener("click", function (event) {
   }
 
   if (signaturePad.isEmpty()) {
-    alert("Please provide a signature first.");
+    alert("Please provide a signature.");
     return;
   }
 
