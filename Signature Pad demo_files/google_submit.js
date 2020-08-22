@@ -54,8 +54,8 @@ $('#google-submit').click(function () {
     data: {
       "First Name": inputFirstName.val(),
       "Last Name": inputLastName.val(),
-      "ID": inputId.val(),
-      "Hours": inputHours.val(),
+      "ID": (inputId.val()).toString(),
+      "Hours": (inputHours.val()).toString(),
       "Signature": signaturePad.toDataURL("image/jpeg"),
     },
     success: function (response) {
