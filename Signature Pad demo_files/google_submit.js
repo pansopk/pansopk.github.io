@@ -67,6 +67,8 @@ $('#google-submit').click(function () {
         snackbar.removeClass('show');
       }, 3000);
 
+      signaturePad.clear();
+
       //Clear inputs
       //inputName.val('');
       //inputAge.val('');
